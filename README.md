@@ -3,7 +3,8 @@
 
 - C01: 简单QML界面
 - C02: QML交互C++
-- C02: QML交互Python
-- C03: QML和JS交互
+- C03: QML交互Python
+- C04: QML内置js
+- C05:  调用Openssl
 
 By: tyza66
