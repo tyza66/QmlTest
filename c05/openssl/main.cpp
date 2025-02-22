@@ -1,6 +1,6 @@
-#include <CryptoUtils.h>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "cryptoopenssl.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
 
-    qmlRegisterType<CryptoUtils>("com.tyza66.crypto", 1, 0, "CryptoUtils");
-    engine.loadFromModule("openssl", "Main");
+    qmlRegisterType<CryptoOpenSSL>("com.openssl.crypto", 1, 0, "CryptoOpenSSL");
+    engine.loadFromModule("openssl_example", "Main");
 
     return app.exec();
 }
