@@ -12,7 +12,6 @@ set(OPENSSL_SSL_LIBRARY "${OPENSSL_ROOT_DIR}/lib/VC/x64/MD/libssl.lib")
 
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 
-# 查找 OpenSSL 库
 find_library(OPENSSL_CRYPTO_LIBRARY NAMES libcrypto crypto PATHS ${OPENSSL_ROOT_DIR}/lib/VC/x64/MD NO_DEFAULT_PATH)
 find_library(OPENSSL_SSL_LIBRARY NAMES libssl ssl PATHS ${OPENSSL_ROOT_DIR}/lib/VC/x64/MD NO_DEFAULT_PATH)
 
@@ -29,8 +28,8 @@ qt_standard_project_setup(REQUIRES 6.5)
 
 qt_add_executable(appopenssl
     main.cpp
+    mycryptoutils.cpp  # 确保包含这个文件
     cryptoopenssl.cpp
-    cryptoopenssl.h
 )
 
 qt_add_qml_module(appopenssl
@@ -45,7 +44,6 @@ set_target_properties(appopenssl PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-# 为 appopenssl 目标设置包含目录和链接库
 target_include_directories(appopenssl PRIVATE ${OPENSSL_INCLUDE_DIR})
 target_link_libraries(appopenssl PRIVATE ${OPENSSL_SSL_LIBRARY} ${OPENSSL_CRYPTO_LIBRARY} Qt6::Quick)
 

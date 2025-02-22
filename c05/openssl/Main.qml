@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import com.openssl.crypto 1.0
+import com.tyza66.crypto 1.0
 
 ApplicationWindow {
     visible: true
@@ -12,25 +13,42 @@ ApplicationWindow {
         id: cryptoOpenSSL
     }
 
-    Column {
-        anchors.centerIn: parent
+    MyCryptoUtils {
+        id: myCryptoUtils
+    }
 
-        TextField {
-            id: inputText
-            placeholderText: "Enter text to encrypt"
-            width: 200
+
+    TextField {
+        id: inputText
+        placeholderText: "Enter text to encrypt"
+        width: 200
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 20
+    }
+
+    Button {
+        id: bt1
+        text: "OS Encrypt"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: inputText.bottom
+        anchors.topMargin: 10
+        onClicked: {
+            var encryptedText = cryptoOpenSSL.md5(inputText.text);
+            encryptedLabel.text = encryptedText;
+            dialog.open();
         }
-
-        Button {
-            text: "Encrypt"
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: inputText.bottom
-            anchors.topMargin: 10
-            onClicked: {
-                var encryptedText = cryptoOpenSSL.md5(inputText.text);
-                encryptedLabel.text = encryptedText;
-                dialog.open();
-            }
+    }
+    Button {
+        id: bt2
+        text: "My Encrypt"
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: inputText.bottom
+        anchors.topMargin: 50
+        onClicked: {
+            var encryptedText = myCryptoUtils.md5(inputText.text);
+            encryptedLabel.text = encryptedText;
+            dialog.open();
         }
     }
 
