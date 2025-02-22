@@ -26,7 +26,7 @@ ApplicationWindow {
                 text: "你好,世界"
             }
             TextField {
-                placeholderText: "Enter some text"
+                placeholderText: "随便输入点什么"
             }
         }
     }
